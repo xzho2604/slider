@@ -26,7 +26,7 @@
         transition: left 0.5s; /*transition for the left scroll*/
     }
 
-    #image_slider li{
+    #image_slider div{
         max-width: 100%;
         float:left;
         list-style: none;
@@ -37,6 +37,35 @@
       width:auto;
       margin:10px;
     }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    margin:10px;
+  }
+
+  .placeholder {
+    height: 500px;
+    width:auto;
+    margin:10px;
+    filter: blur(10px);
+    transform: scale(1);
+  }
+  
+  .picture {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    height: 500px;
+    width:auto;
+    margin:10px;
+    transition: opacity 1s linear;
+  }
+  
+  .picture.loaded {
+    opacity: 1;
+   }
+
 
   </style>
   <!--for asyncronmous loading image-->
@@ -51,20 +80,20 @@
   <div class="container">
       <div class="image-slider-wrapper">
           <ul id="image_slider">
-             <li><img src="./image/loading.svg" data-src="./image/1.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/2.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/3.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/4.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/5.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/6.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/7.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/8.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/9.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/10.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/11.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/12.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/13.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/14.jpg"></li>
+            <div data-src="./image/1.jpg"> <img class="placeholder"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="   >  </div>
+            <div data-src="./image/2.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/3.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/4.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/5.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/6.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/7.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/8.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/9.jpg">  <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  >  </div>
+            <div data-src="./image/10.jpg"> <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ></div>
+            <div data-src="./image/11.jpg"> <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ></div>
+            <div data-src="./image/12.jpg"> <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ></div>
+            <div data-src="./image/13.jpg"> <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ></div>
+            <div data-src="./image/14.jpg"> <img class="placeholder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ></div>
           </ul> 
       </div>
   </div>
