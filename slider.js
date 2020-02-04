@@ -31,7 +31,7 @@ function init(){
   }
 
 
-  totalWidth += 4000; // as padding
+  totalWidth += 40000; // as padding
   ul.style.width = totalWidth + 'px';
   ul.style.left = "0px"; // initial position of he first image
 
