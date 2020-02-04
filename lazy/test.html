@@ -1,0 +1,47 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+      img.lazy {
+        width: 700px;
+        height: 467px;
+        display: block;
+    }
+</style>
+  <!--for asyncronmous loading image-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="jquery.lazy.min.js"></script>
+  <script src="../jQuery.loadScroll.js"></script>
+  <script src="jquery.unveil.js"></script>
+</head>
+
+<body>
+    <img class="lazy" src ="https://previews.123rf.com/images/reamonn/reamonn1706/reamonn170600009/80945029-beautiful-girl-in-a-red-dress-sochi-city.jpg"
+    data-src="https://previews.123rf.com/images/reamonn/reamonn1706/reamonn170600009/80945029-beautiful-girl-in-a-red-dress-sochi-city.jpg"/>
+    <img class="lazy" data-src="https://i.pinimg.com/originals/6f/3f/24/6f3f246ea358c677657f527b512a6583.jpg" />
+    <img class="lazy" data-src="https://farm8.static.flickr.com/7927/47280755432_bd7094457c_b.jpg" />
+    <img class="lazy" data-src="https://live.staticflickr.com/3411/3489763997_5765bfc0bd_o.jpg" />
+    <img class="lazy" data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe-7JVY-x_h7kI62fvy3PT0rkS1AyJx3rmWk1tsnnsGHISB6DT&s" />
+
+     <script>
+       /*
+        $(function() {
+          $('img').Lazy({
+            delay: 2000
+          });
+        });
+        $(function() {
+          // Custom fadeIn Duration
+          $('img').loadScroll(500);
+        });
+
+        */
+       $(document).ready(function() {
+          $('img').unveil();
+        });
+    </script>
+
+
+</body>
+</html>
