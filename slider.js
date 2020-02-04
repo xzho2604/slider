@@ -118,7 +118,7 @@ function loadLarge(img) {
   };
   imgLarge.classList.add('picture');
   imgLarge.setAttribute("loaded",true);
-  parent.innerHTML ="";
+  //parent.innerHTML ="";
   parent.appendChild(imgLarge);
 }
 
