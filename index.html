@@ -26,7 +26,7 @@
         transition: left 0.5s; /*transition for the left scroll*/
     }
 
-    #image_slider li{
+    #image_slider div{
         max-width: 100%;
         float:left;
         list-style: none;
@@ -38,8 +38,37 @@
       margin:10px;
     }
 
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .placeholder {
+    height: 500px;
+    width:auto;
+    margin:10px;
+    filter: blur(10px);
+    transform: scale(1);
+  }
+  
+  .picture {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    height: 500px;
+    width:auto;
+    margin:10px;
+    transition: opacity 1s linear;
+  }
+  
+  .picture.loaded {
+    opacity: 1;
+    }
+
+
   </style>
-  <script src="slider.js"></script>
+  <!--for asyncronmous loading image-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
 </head>
@@ -50,32 +79,26 @@
   <div class="container">
       <div class="image-slider-wrapper">
           <ul id="image_slider">
-             <li><img src="./image/loading.svg" data-src="./image/1.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/2.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/3.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/4.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/5.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/6.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/7.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/8.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/9.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/10.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/11.jpg"></li>
-             <li><img src="./image/loading.svg" data-src="./image/12.jpg"></li>
+            <div data-src="./image/1.jpg"> <img class="placeholder" src="./image/small/1.jpeg"  data-src="./image/1.jpg">  </div>
+            <div data-src="./image/2.jpg">  <img class="placeholder" src="./image/small/2.jpeg"  data-src="./image/2.jpg">  </div>
+            <div data-src="./image/3.jpg">  <img class="placeholder" src="./image/small/3.jpeg"  data-src="./image/3.jpg">  </div>
+            <div data-src="./image/4.jpg">  <img class="placeholder" src="./image/small/4.jpeg"  data-src="./image/4.jpg">  </div>
+            <div data-src="./image/5.jpg">  <img class="placeholder" src="./image/small/5.jpeg"  data-src="./image/5.jpg">  </div>
+            <div data-src="./image/6.jpg">  <img class="placeholder" src="./image/small/6.jpeg"  data-src="./image/6.jpg">  </div>
+            <div data-src="./image/7.jpg">  <img class="placeholder" src="./image/small/7.jpeg"  data-src="./image/7.jpg">  </div>
+            <div data-src="./image/8.jpg">  <img class="placeholder" src="./image/small/8.jpeg"  data-src="./image/8.jpg">  </div>
+            <div data-src="./image/9.jpg">  <img class="placeholder" src="./image/small/9.jpeg"  data-src="./image/9.jpg">  </div>
+            <div data-src="./image/10.jpg"> <img class="placeholder" src="./image/small/10.jpeg" data-src="./image/10.jpg"></div>
+            <div data-src="./image/11.jpg"> <img class="placeholder" src="./image/small/11.jpeg" data-src="./image/11.jpg"></div>
+            <div data-src="./image/12.jpg"> <img class="placeholder" src="./image/small/12.jpeg" data-src="./image/12.jpg"></div>
+            <div data-src="./image/13.jpg"> <img class="placeholder" src="./image/small/13.jpeg" data-src="./image/13.jpg"></div>
+            <div data-src="./image/14.jpg"> <img class="placeholder" src="./image/small/14.jpeg" data-src="./image/14.jpg"></div>
           </ul> 
       </div>
   </div>
 
 
-  <script>
-    /*
-    // lazy loading
-    $(document).ready(function() {
-      $("img").unveil();
-    });
-    */
-  </script>
-
+  <script src="slider.js"></script>
 </body>
 
 

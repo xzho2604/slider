@@ -1,0 +1,78 @@
+<html>
+<head>
+  <style>
+    .container{
+        width:100%;
+        height:60%;
+        /*padding:20px;*/
+        border:1px solid gray;
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        box-sizing:border-box;
+        background: black;
+    }
+
+    .image-slider-wrapper{
+        overflow: hidden;
+        height:100%;
+    }
+
+    #image_slider{
+        position: relative;
+        left:auto;
+        height: 100%;
+        width:90%;
+        padding:0;
+        transition: left 0.5s; /*transition for the left scroll*/
+    }
+
+    #image_slider li{
+        max-width: 100%;
+        float:left;
+        list-style: none;
+    }
+
+    img {
+      height: 500px;
+      width:auto;
+      margin:10px;
+    }
+
+  </style>
+  <!--for asyncronmous loading image-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+</head>
+
+
+<body>
+  <button onclick="slider()">Click me</button>
+  <div class="container">
+      <div class="image-slider-wrapper">
+          <ul id="image_slider">
+             <li><img src="./image/loading.svg" data-src="./image/1.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/2.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/3.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/4.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/5.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/6.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/7.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/8.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/9.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/10.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/11.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/12.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/13.jpg"></li>
+             <li><img src="./image/loading.svg" data-src="./image/14.jpg"></li>
+          </ul> 
+      </div>
+  </div>
+
+
+  <script src="slider.js"></script>
+</body>
+
+
+
+</html>

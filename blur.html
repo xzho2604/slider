@@ -1,0 +1,59 @@
+<html>
+<head>
+<style>
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .placeholder {
+    position: relative;
+    width: 100%;
+    filter: blur(10px);
+    transform: scale(1);
+  }
+  
+  .picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s linear;
+  }
+  
+  .picture.loaded {
+    opacity: 1;
+  }
+</style>
+</head>
+
+<body>
+  <div class="image-container" data-large="./image/1.jpg">
+    <img class="placeholder" src="./image/small/1.jpeg" class="img-small">
+  </div>
+  <div class="image-container" data-large="./image/2.jpg">
+    <img class="placeholder" src="./image/small/2.jpeg" class="img-small">
+  </div>
+
+  <script>
+
+    window.onload = function() {
+      var largePicture = document.querySelector('.image-container')
+    
+      // Load large image
+      var imgLarge = new Image();
+      imgLarge.src = largePicture.dataset.large;
+      imgLarge.onload = function () {
+        imgLarge.classList.add('loaded');
+      };
+        imgLarge.classList.add('picture');
+      largePicture.appendChild(imgLarge);
+    }
+  </script>
+
+
+
+</body>
+</html>

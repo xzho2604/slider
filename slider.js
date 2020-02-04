@@ -5,6 +5,7 @@ var imageNumber;
 var currentImage = 0;
 var accLeft = 0;
 var visibleImage = 0; // last visible image so far
+var imgMark = {}; // record the pixel break point of each image start
 
 
 // init the ul element ,the image total width, the first image width
@@ -18,15 +19,15 @@ function init(){
   imageWidth = liItems[0].children[0].offsetWidth;
 
   // set ul's width as the total width of all images in image slider.
-  lazyLoad(); // init the first visible images
+  lazyLoad(2); // init the first visible images
   var totalWidth = 0;
   for(var i = 0; i < imageNumber;++i){
-    thisImgWidth = liItems[i].children[0].offsetWidth;
+    thisImgWidth = getCurrWidth(i); 
     totalWidth += thisImgWidth;
-
+    imgMark[i] = totalWidth -  thisImgWidth;
    
-    //console.log("ImageNum:" + imageNumber + 
-    //  "thisImgWidth:" + thisImgWidth + "totalWidth:" + totalWidth);
+    //console.log("i:" + i + "; " + 
+    //  "thisImgWidth:" + thisImgWidth + " ;"+  "totalWidth:" + totalWidth);
   }
 
 
@@ -36,12 +37,17 @@ function init(){
 
 }
 
+// check if curent image will be showing in the window given its image index
+function inWindow(indx){
+  return  0 <= imgMark[indx] - accLeft <= window.screen.width;
+}
 // given the current image index get the current image width
 function getCurrWidth(currentImage){
   img = ul.children[currentImage].children[0];
   // compute the image width plus margin  
-  imageWidth = img.offsetWidth + parseInt(window.getComputedStyle(img).margin)*2 ;
+  imageWidth = parseInt(window.getComputedStyle(img).width) + parseInt(window.getComputedStyle(img).margin)*2 ;
   //console.log("image" + currentImage + " width:" + imageWidth);
+  return imageWidth;
 }
 
 
@@ -49,6 +55,7 @@ function getCurrWidth(currentImage){
 function slider(){ 
   // if we slide to the last image already further button click would bring to the
   // first image 
+  console.log("currImag:" + currentImage);
   if(currentImage == imageNumber-1){
     var leftPosition = (imageNumber - 1) * imageWidth;
      // after 2 seconds, call the goBack function to slide to the first image 
@@ -66,27 +73,53 @@ function slider(){
     accLeft += imageWidth;
     
     //TODO: find new visible image as a result of loading and load the image
-    lazyLoad(); // check if any image becomes visible 
+    lazyLoad(3); // check if any image becomes visible 
+    setTimeout(lazyLoad, 600); // delay for the slide animation to confirm visible image
 
   }
 }
 
-// check starting from the current last visible index 
 // and if image is visble load the image and update
-// the visibleImage index
-function lazyLoad() {
-  console.log("visibleiamgeind: " + visibleImage);
+function lazyLoad(num) {
   // locate the last visible image
-  var img = ul.children[visibleImage].children[0];
-  img.src = img.getAttribute("data-src");
-  // if the next image is also visble show the image 
-  for(;visibleImage < imageNumber && elementInViewport(img);){
-    // change the src attributes to data src to show image
-    visibleImage++;
-    img.src = img.getAttribute("data-src");
-    img = ul.children[visibleImage].children[0];
+  var img = ul.children[currentImage].children[0];
+  for(var i = currentImage; i < imageNumber;i++){
+
+    if(elementInViewport(img) && !img.getAttribute("loaded")){
+      // console.log("i:" + i , "visible:" + elementInViewport(img))
+      img = ul.children[i].children[0];
+      // get the parent element and insert the class loaded and picture
+      // img.src = img.getAttribute("data-src");
+      loadLarge(img);
+    } else{
+        // continue load image that even not seen now
+        for(var j= i; j < imageNumber && j < i+ num;j++){
+          img = ul.children[j].children[0];
+          if(!img.getAttribute("loaded")){
+           // img.src = img.getAttribute("data-src");
+           loadLarge(img);
+          }
+        }
+      break;
+    }
   }
-  console.log("final visibleImage: ", visibleImage);
+}
+
+// given the image element lazy load the large image with blur effects
+function loadLarge(img) {
+  var parent = img.parentElement;
+
+  // Load large image
+  var imgLarge = new Image();
+  imgLarge.src = parent.getAttribute("data-src");
+
+  imgLarge.onload = function () {
+    imgLarge.classList.add('loaded');
+  };
+  imgLarge.classList.add('picture');
+  imgLarge.setAttribute("loaded",true);
+  parent.innerHTML ="";
+  parent.appendChild(imgLarge);
 }
 
 // go back to the first slide
@@ -119,5 +152,8 @@ function elementInViewport(el) {
 }
 
 // init function call 
-window.onload = init;
+window.addEventListener('load', function () {
+  init();
+})
+// window.onload = init;
 
