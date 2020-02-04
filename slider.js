@@ -119,7 +119,10 @@ function loadLarge(img) {
   imgLarge.classList.add('picture');
   imgLarge.setAttribute("loaded",true);
   //parent.innerHTML ="";
-  parent.appendChild(imgLarge);
+  console.log(parent.childNodes);
+  if(parent.childNodes.length -2 <= 1) {
+    parent.appendChild(imgLarge);
+  }
 }
 
 // go back to the first slide
