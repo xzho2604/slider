@@ -5,7 +5,7 @@
 </head>
 
 
-<body style="overflow-x:hidden">
+<body style="overflow-x:hidden;visibility:hidden">
   <div class="container" >
       <div class="image-slider-wrapper">
           <div id="image_slider">
@@ -30,6 +30,9 @@
   <script src="slider.js"></script>
 
   <script>
+       // show body only when element and css loaded
+       var body = document.getElementsByTagName("body");
+       body[0].style.visibility = "visible";
       // mobile start up script
       window.onscroll = showVisible;
       window.onload = showVisible;

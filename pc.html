@@ -4,7 +4,7 @@
   <link rel ="stylesheet" href="image_style.css">
 </head>
 
-<body style="overflow-x:hidden">
+<body style="overflow-x:hidden;visibility:hidden">
   <a href="#" class="arrow right"onclick="next()"></a>
   <a href="#" class="arrow left" onclick="previous()"></a>
 
@@ -30,12 +30,17 @@
   </div>
   
   <script src="slider.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
       window.addEventListener('load', function () {
+       // show body only when element and css loaded
+       var body = document.getElementsByTagName("body");
+       body[0].style.visibility = "visible";
+
        init();
      });
   </script>
+
 </body>
 </html>
 
