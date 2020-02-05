@@ -1,37 +1,11 @@
 <html>
 <head>
-<style>
-  .image-container {
-    position: relative;
-    overflow: hidden;
-    margin:10px;
-  }
-  
-  .placeholder {
-    position: relative;
-    width: 100%;
-    filter: blur(10px);
-    transform: scale(1);
-  }
-  
-  .picture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    width: 100%;
-    height: auto;
-    transition: opacity 1s linear;
-  }
-  
-  .picture.loaded {
-    opacity: 1;
-  }
-</style>
-
+  <link rel ="stylesheet" href="arrow.css">
+  <link rel ="stylesheet" href="mobile.css">
 </head>
 
-<body>
+
+<body style="overflow-x:hidden">
   <div class="container" >
       <div class="image-slider-wrapper">
           <div id="image_slider">
@@ -52,8 +26,17 @@
           </div> 
       </div>
   </div>
+  
+  <script src="slider.js"></script>
 
-  <script src="mobile.js"></script>
+  <script>
+      // mobile start up script
+      window.onscroll = showVisible;
+      window.onload = showVisible;
+  </script>
 
 </body>
 </html>
+
+
+

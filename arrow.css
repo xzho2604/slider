@@ -1,0 +1,36 @@
+
+
+ .arrow {
+	 position: absolute;
+	 top: 30%;
+   z-index:1;
+	 width: 3vmin;
+	 height: 3vmin;
+	 background: transparent;
+	 border-top:  1vmin solid  #00000061; 
+	 border-right:1vmin solid #00000061;
+	 box-shadow: 0 0 0 lightgray;
+	 transition: all 200ms ease;
+}
+ .arrow.left {
+	 left: 1%;
+	 transform: translate3d(0, -50%, 0) rotate(-135deg);
+}
+ .arrow.right {
+	 right: 1%;
+	 transform: translate3d(0, -50%, 0) rotate(45deg);
+}
+ .arrow:hover {
+	 border-color: orange;
+	 box-shadow: 0.5vmin -0.5vmin 0 #969292b5;
+}
+ .arrow:before {
+	 content: '';
+	 position: absolute;
+	 top: 50%;
+	 left: 50%;
+	 transform: translate(-40%, -60%) rotate(45deg);
+	 width: 200%;
+	 height: 200%;
+}
+ 

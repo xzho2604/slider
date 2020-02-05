@@ -1,40 +1,22 @@
 <html>
 <head>
-<style>
-  .image-container {
-    position: relative;
-    overflow: hidden;
-    margin:10px;
-  }
   
-  .placeholder {
-    position: relative;
-    width: 100%;
-    filter: blur(10px);
-    transform: scale(1);
-  }
-  
-  .picture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    width: 100%;
-    height: auto;
-    transition: opacity 1s linear;
-  }
-  
-  .picture.loaded {
-    opacity: 1;
-  }
-</style>
+  <link rel ="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+  <link rel ="stylesheet" href="arrow.css">
+  <link rel ="stylesheet" href="image_style.css">
+  <!--for asyncronmous loading image-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 </head>
 
+
 <body>
+  <a href="#" class="arrow right"onclick="next()"></a>
+  <a href="#" class="arrow left" onclick="previous()"></a>
+
   <div class="container" >
       <div class="image-slider-wrapper">
-          <div id="image_slider">
+          <ul id="image_slider">
             <div class="image-container" data-src="./image/1.jpg"> <img class="placeholder"  src="./image/small/1.jpeg"   >  </div>
             <div class="image-container" data-src="./image/2.jpg">  <img class="placeholder" src="./image/small/2.jpeg"  >  </div>
             <div class="image-container" data-src="./image/3.jpg">  <img class="placeholder" src="./image/small/3.jpeg"  >  </div>
@@ -49,11 +31,14 @@
             <div class="image-container" data-src="./image/12.jpg"> <img class="placeholder" src="./image/small/12.jpeg" ></div>
             <div class="image-container" data-src="./image/13.jpg"> <img class="placeholder" src="./image/small/13.jpeg" ></div>
             <div class="image-container" data-src="./image/14.jpg"> <img class="placeholder" src="./image/small/14.jpeg" ></div>
-          </div> 
+          </ul> 
       </div>
   </div>
 
-  <script src="mobile.js"></script>
 
+  <script src="slider.js"></script>
 </body>
+
+
+
 </html>

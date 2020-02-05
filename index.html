@@ -1,20 +1,22 @@
 <html>
 <head>
   
-  <link rel ="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
   <link rel ="stylesheet" href="arrow.css">
+
+  <!-- choose either one of two for mobile or pc mode-->
+  <!--<link rel ="stylesheet" href="mobile.css">-->
   <link rel ="stylesheet" href="image_style.css">
 
 </head>
 
 
-<body>
+<body style="overflow-x:hidden">
   <a href="#" class="arrow right"onclick="next()"></a>
   <a href="#" class="arrow left" onclick="previous()"></a>
 
   <div class="container" >
       <div class="image-slider-wrapper">
-          <ul id="image_slider">
+          <div id="image_slider">
             <div class="image-container" data-src="./image/1.jpg"> <img class="placeholder"  src="./image/small/1.jpeg"   >  </div>
             <div class="image-container" data-src="./image/2.jpg">  <img class="placeholder" src="./image/small/2.jpeg"  >  </div>
             <div class="image-container" data-src="./image/3.jpg">  <img class="placeholder" src="./image/small/3.jpeg"  >  </div>
@@ -29,12 +31,42 @@
             <div class="image-container" data-src="./image/12.jpg"> <img class="placeholder" src="./image/small/12.jpeg" ></div>
             <div class="image-container" data-src="./image/13.jpg"> <img class="placeholder" src="./image/small/13.jpeg" ></div>
             <div class="image-container" data-src="./image/14.jpg"> <img class="placeholder" src="./image/small/14.jpeg" ></div>
-          </ul> 
+          </div> 
       </div>
   </div>
-
-
+  
   <script src="slider.js"></script>
+
+  <script>
+    var mobile = true; //mobile mode
+
+    var head = document.getElementsByTagName("head");
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    
+    // depend on pc or mobile mode attached differen style sheet
+    link.href = mobile? 'mobile.css' : 'pc.css';
+
+    head[0].appendChild(link);
+
+    // start either of the script for mobile or pc mode
+    if(mobile){
+
+      document.getElementsByClassName("arrow left")[0].remove();
+      document.getElementsByClassName("arrow right")[0].remove();
+
+      // mobile start up script
+      window.onscroll = showVisible;
+      window.onload = showVisible;
+
+    }else{
+      window.addEventListener('load', function () {
+       init();
+     });
+    }
+  </script>
+
 </body>
 
 

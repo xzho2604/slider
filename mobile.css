@@ -1,0 +1,27 @@
+.image-container {
+  position: relative;
+  overflow: hidden;
+  margin:5px;
+}
+
+.placeholder {
+  position: relative;
+  width: 100%;
+  filter: blur(10px);
+  transform: scale(1);
+}
+
+.picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: auto;
+  transition: opacity 1s linear;
+}
+
+.picture.loaded {
+  opacity: 1;
+}
+
