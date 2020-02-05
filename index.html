@@ -23,7 +23,7 @@
         height: 100%;
         width:90%;
         padding:0;
-        transition: left 0.5s; /*transition for the left scroll*/
+        transition: left 0.3s; /*transition for the left scroll*/
     }
 
     #image_slider div{
@@ -41,7 +41,6 @@
   .image-container {
     position: relative;
     overflow: hidden;
-    margin:10px;
   }
 
   .placeholder {
@@ -77,7 +76,8 @@
 
 
 <body>
-  <button onclick="slider()">Click me</button>
+  <button onclick="next()">Next</button>
+  <button onclick="previous()">Prev</button>
   <div class="container">
       <div class="image-slider-wrapper">
           <ul id="image_slider">

@@ -6,6 +6,8 @@ var currentImage = 0;
 var accLeft = 0;
 var visibleImage = 0; // last visible image so far
 var imgMark = {}; // record the pixel break point of each image start
+var posArr =[]; // record the pixels has slide for previous button to go back
+var lazyFlag = false; // indicate if lazy load finished
 
 
 // init the ul element ,the image total width, the first image width
@@ -20,6 +22,8 @@ function init(){
 
   // set ul's width as the total width of all images in image slider.
   lazyLoad(2); // init the first visible images
+
+  //TODO: better way to calculate totalwidth with var lenght
   var totalWidth = 0;
   for(var i = 0; i < imageNumber;++i){
     thisImgWidth = getCurrWidth(i); 
@@ -30,7 +34,7 @@ function init(){
     //  "thisImgWidth:" + thisImgWidth + " ;"+  "totalWidth:" + totalWidth);
   }
 
-
+  
   totalWidth += 40000; // as padding
   ul.style.width = totalWidth + 'px';
   ul.style.left = "0px"; // initial position of he first image
@@ -52,30 +56,50 @@ function getCurrWidth(currentImage){
 
 
 // slide the window to the left
-function slider(){ 
-  // if we slide to the last image already further button click would bring to the
-  // first image 
-  console.log("currImag:" + currentImage);
-  if(currentImage == imageNumber-1){
-    var leftPosition = (imageNumber - 1) * imageWidth;
-     // after 2 seconds, call the goBack function to slide to the first image 
-    goBack(leftPosition);
-  }else{ // else would keep sliding images
-    // get the image width of the current image
-    getCurrWidth(currentImage);
-  
-    // slide to the left of one image
-    currLeft = parseInt(window.getComputedStyle(ul).left) - parseInt(imageWidth);
-    ul.style.left = currLeft + 'px';
-
-    //console.log("currLeft:" + currLeft);
-    currentImage++;
-    accLeft += imageWidth;
+function next(){ 
+  if(lazyFlag) { // only excute if image loaded
+    // if we slide to the last image already further button click would bring to the
+    // first image 
+    console.log("currImag:" + currentImage);
+    if(currentImage == imageNumber-1){
+       // after 2 seconds, call the goBack function to slide to the first image 
+      goBack();
+      setTimeout(goBack, 400); // delay for the slide animation to confirm visible image
+    }else{ // else would keep sliding images
+      // get the image width of the current image
+      getCurrWidth(currentImage);
+      posArr.push(imageWidth); // record howm many pixel moved
     
-    //TODO: find new visible image as a result of loading and load the image
-    lazyLoad(3); // check if any image becomes visible 
-    setTimeout(lazyLoad, 600); // delay for the slide animation to confirm visible image
+      // slide to the left of one image
+      var currLeft = parseInt(window.getComputedStyle(ul).left) - parseInt(imageWidth);
+      ul.style.left = currLeft + 'px';
+  
+      //console.log("currLeft:" + currLeft);
+      currentImage++;
+      accLeft += imageWidth;
+      
+      lazyLoad(3); // check if any image becomes visible 
+      setTimeout(lazyLoad, 400); // delay for the slide animation to confirm visible image
+      lazyFlag = false;
+    }
+  }
+}
 
+function setFlag(){
+  lazyFlag =true;
+}
+
+
+// slide window to the right
+function previous() {
+  if(posArr.length != 0 && parseInt(ul.style.left) != 0 && lazyFlag) {
+    var right_shift = posArr.pop();
+    var currLeft = parseInt(window.getComputedStyle(ul).left) + right_shift;
+    ul.style.left = currLeft + 'px';
+    currentImage--;
+
+    lazyFlag = false;
+    setTimeout(setFlag,400);
   }
 }
 
@@ -85,7 +109,7 @@ function lazyLoad(num) {
   var img = ul.children[currentImage].children[0];
   for(var i = currentImage; i < imageNumber;i++){
 
-    if(elementInViewport(img) && !img.getAttribute("loaded")){
+    if(elementInViewport(img) && !img.parentElement.getAttribute("loaded")){
       // console.log("i:" + i , "visible:" + elementInViewport(img))
       img = ul.children[i].children[0];
       // get the parent element and insert the class loaded and picture
@@ -95,7 +119,7 @@ function lazyLoad(num) {
         // continue load image that even not seen now
         for(var j= i; j < imageNumber && j < i+ num;j++){
           img = ul.children[j].children[0];
-          if(!img.getAttribute("loaded")){
+          if(!img.parentElement.getAttribute("loaded")){
            // img.src = img.getAttribute("data-src");
            loadLarge(img);
           }
@@ -103,6 +127,7 @@ function lazyLoad(num) {
       break;
     }
   }
+  lazyFlag = true;
 }
 
 // given the image element lazy load the large image with blur effects
@@ -117,7 +142,7 @@ function loadLarge(img) {
     imgLarge.classList.add('loaded');
   };
   imgLarge.classList.add('picture');
-  imgLarge.setAttribute("loaded",true);
+  parent.setAttribute("loaded",true);
   //parent.innerHTML ="";
   console.log(parent.childNodes);
   if(parent.childNodes.length -2 <= 1) {
@@ -126,11 +151,13 @@ function loadLarge(img) {
 }
 
 // go back to the first slide
-function goBack(leftPosition){
+function goBack(){
     ul.style.left = "0px";
     currentImage = 0;
     accLeft = 0;
     visibleImage = 0;
+    lazyFlag = true;
+    console.log("going back:" + lazyFlag);
 }
 
 // to check if element is in view port
