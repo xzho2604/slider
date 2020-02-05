@@ -1,78 +1,9 @@
 <html>
 <head>
-  <style>
-    .container{
-        width:95%;
-        height:60%;
-        margin:auto;
-        /*padding:20px;*/
-        /*border:1px solid gray;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing:border-box;
-        box-sizing:border-box;
-        background: black;
-          */
-    }
-
-    .image-slider-wrapper{
-        overflow: hidden;
-        height:100%;
-    }
-
-    #image_slider{
-        position: relative;
-        left:auto;
-        height: 100%;
-        width:80%;
-        padding:0;
-        transition: left 0.3s; /*transition for the left scroll*/
-    }
-
-    #image_slider div{
-        max-width: 100%;
-        float:left;
-        list-style: none;
-    }
-
-    img {
-      height: 500px;
-      width:auto;
-    }
-
-  .image-container {
-    position: relative;
-    overflow: hidden;
-    margin:5px;
-
-  }
-
-  .placeholder {
-    height: 500px;
-    width:auto;
-    filter: blur(10px);
-    transform: scale(1);
-  }
   
-  .picture {
-    position:absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    height: 500px;
-    width:auto;
-    transition: opacity 1s linear;
-  }
-  
-  .picture.loaded {
-    opacity: 1;
-   }
-
-
-  </style>
   <link rel ="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
   <link rel ="stylesheet" href="arrow.css">
-  <!--for asyncronmous loading image-->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link rel ="stylesheet" href="image_style.css">
 
 </head>
 
