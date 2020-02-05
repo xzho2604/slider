@@ -2,8 +2,9 @@
 <head>
   <style>
     .container{
-        width:100%;
+        width:95%;
         height:60%;
+        margin:auto;
         /*padding:20px;*/
         /*border:1px solid gray;
         -webkit-box-sizing:border-box;
@@ -22,7 +23,7 @@
         position: relative;
         left:auto;
         height: 100%;
-        width:90%;
+        width:80%;
         padding:0;
         transition: left 0.3s; /*transition for the left scroll*/
     }
@@ -68,17 +69,19 @@
 
 
   </style>
+  <link rel ="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+  <link rel ="stylesheet" href="arrow.css">
   <!--for asyncronmous loading image-->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
 
 </head>
 
 
 <body>
-  <button onclick="next()">Next</button>
-  <button onclick="previous()">Prev</button>
-  <div class="container">
+  <a href="#" class="arrow right"onclick="next()"></a>
+  <a href="#" class="arrow left" onclick="previous()"></a>
+
+  <div class="container" >
       <div class="image-slider-wrapper">
           <ul id="image_slider">
             <div class="image-container" data-src="./image/1.jpg"> <img class="placeholder"  src="./image/small/1.jpeg"   >  </div>

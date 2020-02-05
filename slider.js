@@ -1,11 +1,7 @@
 var ul;
-var liItems;
-var imageWidth;
+var currImage;
 var imageNumber;
-var currentImage = 0;
-var accLeft = 0;
-var visibleImage = 0; // last visible image so far
-var imgMark = {}; // record the pixel break point of each image start
+var currImgIndx = 0;
 var posArr =[]; // record the pixels has slide for previous button to go back
 var lazyFlag = false; // indicate if lazy load finished
 
@@ -14,11 +10,10 @@ var lazyFlag = false; // indicate if lazy load finished
 function init(){
   // get the image list
   ul = document.getElementById('image_slider');
+  currImage = ul.children[0].children[0];
 
   // get the first image width, total number of images
-  liItems = ul.children;
-  imageNumber = liItems.length;
-  imageWidth = liItems[0].children[0].offsetWidth;
+  imageNumber = ul.children.length;
 
   // set ul's width as the total width of all images in image slider.
   lazyLoad(2); // init the first visible images
@@ -28,29 +23,23 @@ function init(){
   for(var i = 0; i < imageNumber;++i){
     thisImgWidth = getCurrWidth(i); 
     totalWidth += thisImgWidth;
-    imgMark[i] = totalWidth -  thisImgWidth;
    
     //console.log("i:" + i + "; " + 
     //  "thisImgWidth:" + thisImgWidth + " ;"+  "totalWidth:" + totalWidth);
   }
 
-  
   totalWidth += 40000; // as padding
   ul.style.width = totalWidth + 'px';
   ul.style.left = "0px"; // initial position of he first image
 
 }
 
-// check if curent image will be showing in the window given its image index
-function inWindow(indx){
-  return  0 <= imgMark[indx] - accLeft <= window.screen.width;
-}
 // given the current image index get the current image width
-function getCurrWidth(currentImage){
-  img = ul.children[currentImage].children[0];
+function getCurrWidth(currImgIndx){
+  img = ul.children[currImgIndx].children[0];
   // compute the image width plus margin  
-  imageWidth = parseInt(window.getComputedStyle(img).width) + parseInt(window.getComputedStyle(img.parentElement).margin)*2 ;
-  //console.log("image" + currentImage + " width:" + imageWidth);
+  var imageWidth = parseInt(window.getComputedStyle(img).width) + parseInt(window.getComputedStyle(img.parentElement).margin)*2 ;
+  //console.log("image" + currImgIndx + " width:" + imageWidth);
   return imageWidth;
 }
 
@@ -60,14 +49,13 @@ function next(){
   if(lazyFlag) { // only excute if image loaded
     // if we slide to the last image already further button click would bring to the
     // first image 
-    console.log("currImag:" + currentImage);
-    if(currentImage == imageNumber-1){
+    if(currImgIndx == imageNumber-1){
        // after 2 seconds, call the goBack function to slide to the first image 
       goBack();
       setTimeout(goBack, 400); // delay for the slide animation to confirm visible image
     }else{ // else would keep sliding images
       // get the image width of the current image
-      getCurrWidth(currentImage);
+      var imageWidth = getCurrWidth(currImgIndx);
       posArr.push(imageWidth); // record howm many pixel moved
     
       // slide to the left of one image
@@ -75,8 +63,7 @@ function next(){
       ul.style.left = currLeft + 'px';
   
       //console.log("currLeft:" + currLeft);
-      currentImage++;
-      accLeft += imageWidth;
+      currImgIndx++;
       
       lazyLoad(3); // check if any image becomes visible 
       setTimeout(lazyLoad, 400); // delay for the slide animation to confirm visible image
@@ -96,7 +83,7 @@ function previous() {
     var right_shift = posArr.pop();
     var currLeft = parseInt(window.getComputedStyle(ul).left) + right_shift;
     ul.style.left = currLeft + 'px';
-    currentImage--;
+    currImgIndx--;
 
     lazyFlag = false;
     setTimeout(setFlag,400);
@@ -106,8 +93,8 @@ function previous() {
 // and if image is visble load the image and update
 function lazyLoad(num) {
   // locate the last visible image
-  var img = ul.children[currentImage].children[0];
-  for(var i = currentImage; i < imageNumber;i++){
+  var img = ul.children[currImgIndx].children[0];
+  for(var i = currImgIndx; i < imageNumber;i++){
 
     if(elementInViewport(img) && !img.parentElement.getAttribute("loaded")){
       // console.log("i:" + i , "visible:" + elementInViewport(img))
@@ -153,9 +140,7 @@ function loadLarge(img) {
 // go back to the first slide
 function goBack(){
     ul.style.left = "0px";
-    currentImage = 0;
-    accLeft = 0;
-    visibleImage = 0;
+    currImgIndx = 0;
     lazyFlag = true;
     console.log("going back:" + lazyFlag);
 }
