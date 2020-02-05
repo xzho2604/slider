@@ -49,7 +49,7 @@ function inWindow(indx){
 function getCurrWidth(currentImage){
   img = ul.children[currentImage].children[0];
   // compute the image width plus margin  
-  imageWidth = parseInt(window.getComputedStyle(img).width) + parseInt(window.getComputedStyle(img).margin)*2 ;
+  imageWidth = parseInt(window.getComputedStyle(img).width) + parseInt(window.getComputedStyle(img.parentElement).margin)*2 ;
   //console.log("image" + currentImage + " width:" + imageWidth);
   return imageWidth;
 }
